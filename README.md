@@ -1,4 +1,6 @@
 # IPSVRG
+A light MATLAB package for acceleration of SVRG and Katyusha X by inexact preconditioning.
+
 The paper can be found here. Users should read the paper for problem descriptions and parameter definitions. There are three test problems: LASSO, logistic regression, and modified PCA (sum-of-nonconxex instance). For LASSO and logistic regression, the input data is a struct of
 
       [data.A, data.b]
