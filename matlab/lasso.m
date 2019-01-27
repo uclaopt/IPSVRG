@@ -1,6 +1,6 @@
 %% <<-- Archive -->>
 %% Project: Acceleration of SVRG and Katyusha X by Inexact Preconditioning
-%% Coded by: Fei Feng
+%% Authors: Yanli Liu, Fei Feng, Wotao Yin
 %% Last update: 01/24/2019
 
 classdef lasso
@@ -57,10 +57,12 @@ classdef lasso
           gamma = prob.params.GAMMA;
           lambda1 = prob.params.LAMBDA1;
           eta = prob.params.ETA;
+          
           % no preconditioner
           if(prob.params.PRECDN == 0)
               x=w-eta*tilde_g;
               y(:)=sign(x(:)).*(max(abs(x(:))-eta*lambda1, 0)); % proximal L1          
+          
           % preconditioner with BCD subroutine
           elseif(prob.params.FISTA == 0)
               block_size =  prob.params.BCD_SIZE;
@@ -87,7 +89,8 @@ classdef lasso
                       end
                   end
               end
-          % preconditioner with FISTA subroutine  
+              
+          % preconditioner with FISTA subroutine
           else
               if(prob.params.BUILD==0)
                   fprintf('please use FISTA with params.BUILD = 1');
@@ -124,7 +127,6 @@ classdef lasso
           if(block_size==1)
               prob.diag_M = diag(prob.M);
           end
-         
       end
       
       % sub-optimality

@@ -1,6 +1,6 @@
 %% <<-- Archive -->>
 %% Project: Acceleration of SVRG and Katyusha X by Inexact Preconditioning
-%% Coded by: Fei Feng
+%% Authors: Yanli Liu, Fei Feng, Wotao Yin
 %% Last update: 01/24/2019
 
 classdef logistic
@@ -67,12 +67,14 @@ classdef logistic
           gamma = prob.params.GAMMA;
           lambda1 = prob.params.LAMBDA1;
           eta = prob.params.ETA;
+          
           % no preconditioner
           if(prob.params.PRECDN == 0)
               % gradient descent
               x=w-eta*tilde_g;
               % proximal L1
               y(:)=sign(x(:)).*(max(abs(x(:))-eta*lambda1, 0));             
+          
           % preconditioner with BCD
           elseif(prob.params.FISTA == 0)
               block_size =  prob.params.BCD_SIZE;
@@ -99,7 +101,8 @@ classdef logistic
                       end
                   end
               end
-          % preconditioner with FISTA    
+              
+          % preconditioner with FISTA
           else
               if(prob.params.BUILD==0)
                   fprintf('use FISTA with params.BUILD=1');
