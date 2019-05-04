@@ -110,7 +110,7 @@ classdef logistic
                   t_old = 1;
                   x_old = w;
                   for iter = 1:prob.params.MAX_SUB_ITER
-                      temp = y - gamma * (prob.M * (y-w)+tilde_g);
+                      temp = y - gamma * (prob.M * (y-w)/eta+tilde_g);
                       x_new(:)=sign(temp(:)).*(max(abs(temp(:))-gamma*lambda1, 0)); 
                       t_new = (1+sqrt(1+4*t_old^2))/2;
                       y = x_new' + (t_old-1)/t_new*(x_new'-x_old);
